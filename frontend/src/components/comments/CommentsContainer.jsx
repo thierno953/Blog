@@ -31,6 +31,7 @@ const CommentsContainer = ({ className, logginedUserId }) => {
       replyOnUser: replyOnUser,
       createdAt: new Date().toISOString(),
     };
+
     setComments((curState) => {
       return [newComment, ...curState];
     });

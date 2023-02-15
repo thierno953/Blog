@@ -17,14 +17,17 @@ const Comment = ({
 }) => {
   const isUserLoggined = Boolean(logginedUserId);
   const commentBelongsToUser = logginedUserId === comment.user._id;
+
   const isReplying =
     affectedComment &&
     affectedComment.type === "replying" &&
     affectedComment._id === comment._id;
+
   const isEditing =
     affectedComment &&
     affectedComment.type === "editing" &&
     affectedComment._id === comment._id;
+
   const repliedCommentId = parentId ? parentId : comment._id;
   const replyOnUserId = comment.user._id;
 
@@ -40,18 +43,20 @@ const Comment = ({
           {comment.user.name}
         </h5>
         <span className="text-xs text-dark-light">
-          {new Date(comment.createdAt).toLocaleDateString("en-US", {
+          {new Date(comment.createdAt).toLocaleDateString("en-EU", {
             day: "numeric",
             month: "short",
             year: "numeric",
             hour: "2-digit",
           })}
         </span>
+
         {!isEditing && (
           <p className="font-opensans mt-[10px] text-dark-light">
             {comment.desc}
           </p>
         )}
+
         {isEditing && (
           <CommentForm
             btnLabel="Update"
@@ -60,6 +65,7 @@ const Comment = ({
             initialText={comment.desc}
           />
         )}
+
         <div className="flex items-center gap-x-3 text-dark-light font-roboto text-sm mt-3 mb-3">
           {isUserLoggined && (
             <button
@@ -72,6 +78,7 @@ const Comment = ({
               <span>Reply</span>
             </button>
           )}
+
           {commentBelongsToUser && (
             <>
               <button
@@ -93,6 +100,7 @@ const Comment = ({
             </>
           )}
         </div>
+
         {isReplying && (
           <CommentForm
             btnLabel="Reply"
@@ -102,6 +110,7 @@ const Comment = ({
             formCancelHandler={() => setAffectedComment(null)}
           />
         )}
+
         {replies.length > 0 && (
           <div>
             {replies.map((reply) => (
