@@ -1,1 +1,1 @@
-# MERN stack Blog app using Tailwind CSS 
+# MERN stack Blog app using Tailwind CSS 👍
