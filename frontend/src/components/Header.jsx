@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 import { images } from "../constants";
 
@@ -100,7 +101,7 @@ const Header = () => {
             ))}
           </ul>
           <button className="px-6 py-2 mt-5 font-semibold text-blue-500 transition-all duration-300 border-2 border-blue-500 rounded-full lg:mt-0 hover:bg-blue-500 hover:text-white">
-            Sign in
+            <Link to={"register"}>Sign in</Link>
           </button>
         </div>
       </header>
