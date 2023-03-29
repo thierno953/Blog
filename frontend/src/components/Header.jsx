@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import { images } from "../constants";
 
