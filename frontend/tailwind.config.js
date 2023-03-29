@@ -9,7 +9,7 @@ module.exports = {
           light: "#5A7184",
           hard: "#0D2436",
           soft: "#183B56",
-          black1: "#030301",
+          black1: "#1a1d24",
         },
       },
       fontFamily: {

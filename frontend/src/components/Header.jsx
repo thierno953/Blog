@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 import { images } from "../constants";
 
@@ -46,12 +47,12 @@ const NavItem = ({ item }) => {
               dropdown ? "block" : "hidden"
             } lg:hidden transition-all duration-500 pt-4 lg:absolute lg:bottom-0 lg:right-0 lg:transform lg:translate-y-full lg:group-hover:block w-max`}
           >
-            <ul className="flex flex-col overflow-hidden text-center rounded-lg shadow-lg bg-dark-black1 lg:bg-transparent">
+            <ul className="flex flex-col overflow-hidden text-center rounded-lg shadow-lg bg-dark-soft lg:bg-transparent">
               {item.items.map((page, index) => (
                 <a
-                  key={index}
+                 key={index}
                   href="/"
-                  className="px-4 py-2 hover:bg-dark-black1"
+                  className="px-4 py-2 text-white hover:bg-dark-hard hover:text-white lg:text-dark-soft"
                 >
                   {page}
                 </a>
@@ -74,10 +75,10 @@ const Header = () => {
   };
 
   return (
-    <section>
-      <header className="container mx-auto px-5 flex justify-between py-4 items-center">
+    <section className="sticky top-0 left-0 right-0 z-50 bg-white">
+      <header className="container flex items-center justify-between px-5 py-4 mx-auto">
         <div>
-          <img className="w-[4rem] sm:w-[6rem]" src={images.Logo} alt="logo" />
+          <img className="w-[4rem]" src={images.Logo} alt="logo" />
         </div>
         <div className="z-50 lg:hidden">
           {navIsVisible ? (
@@ -92,9 +93,9 @@ const Header = () => {
         <div
           className={`${
             navIsVisible ? "right-0" : "-right-full"
-          } mt-[56px] lg:mt-0 bg-dark-black1 lg:bg-transparent flex flex-col w-full lg:w-auto items-center justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9`}
+          } transition-all duration-300 mt-[56px] lg:mt-0 bg-dark-black1 lg:bg-transparent z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center`}
         >
-          <ul className="flex flex-col items-center font-semibold text-white gap-y-5 lg:flex-row gap-x-2">
+          <ul className="flex flex-col items-center font-semibold text-white gap-y-5 lg:text-dark-soft lg:flex-row gap-x-2">
             {navItemsInfo.map((item) => (
               <NavItem key={item.name} item={item} />
             ))}
