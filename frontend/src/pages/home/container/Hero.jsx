@@ -1,9 +1,11 @@
 import React from "react";
 import { FiSearch } from "react-icons/fi";
 
+import { images } from "../../../constants";
+
 const Hero = () => {
   return (
-    <section className="container flex flex-col px-5 py-5 mx-auto items-center justify-center">
+    <section className="container flex flex-col px-5 py-5 mx-auto lg:flex-row">
       <div className="mt-10 lg:w-1/2">
         <h1 className="font-roboto text-3xl text-center font-bold text-dark-soft md:text-5xl lg:text-4xl xl:text-5xl lg:text-left lg:max-w-[540px]">
           Read the most interesting articles
@@ -41,6 +43,13 @@ const Hero = () => {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="hidden lg:block lg:1/2">
+        <img
+          className="w-full"
+          src={images.HeroImage}
+          alt="users are reading articles"
+        />
       </div>
     </section>
   );
