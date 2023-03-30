@@ -9,7 +9,7 @@ const CommentsContainer = ({ className, logginedUserId }) => {
   const mainComments = comments.filter((comment) => comment.parent === null);
   const [affectedComment, setAffectedComment] = useState(null);
 
-    console.log(comments);
+  console.log(comments);
 
   useEffect(() => {
     (async () => {
@@ -31,7 +31,6 @@ const CommentsContainer = ({ className, logginedUserId }) => {
       replyOnUser: replyOnUser,
       createdAt: new Date().toISOString(),
     };
-
     setComments((curState) => {
       return [newComment, ...curState];
     });
@@ -72,7 +71,7 @@ const CommentsContainer = ({ className, logginedUserId }) => {
         btnLabel="Send"
         formSubmitHanlder={(value) => addCommentHandler(value)}
       />
-      <div className="space-y-4 mt-8">
+      <div className="mt-8 space-y-4">
         {mainComments.map((comment) => (
           <Comment
             key={comment._id}
