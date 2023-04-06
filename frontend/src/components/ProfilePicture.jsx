@@ -11,7 +11,7 @@ const ProfilePicture = ({ avatar }) => {
           htmlFor="profilePicture"
           className="absolute inset-0 bg-transparent rounded-full cursor-pointer"
         >
-          {avatar ? (
+          {!avatar ? (
             <img
               src={stables.UPLOAD_FOLDER_BASE_URL + avatar}
               alt="profile"
