@@ -19,7 +19,6 @@ const ProfilePage = () => {
   const {
     data: profileData,
     isLoading: profileIsLoading,
-    // eslint-disable-next-line
     error: profileError,
   } = useQuery({
     queryFn: () => {
@@ -28,22 +27,19 @@ const ProfilePage = () => {
     queryKey: ["profile"],
   });
 
-  // eslint-disable-next-line
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading: updateProfileIsLoading } = useMutation({
     mutationFn: ({ name, email, password }) => {
       return updateProfile({
         token: userState.userInfo.token,
         userData: { name, email, password },
       });
     },
-
     onSuccess: (data) => {
       dispatch(userActions.setUserInfo(data));
       localStorage.setItem("account", JSON.stringify(data));
       queryClient.invalidateQueries(["profile"]);
       toast.success("Profile is updated");
     },
-
     onError: (error) => {
       toast.error(error.message);
       console.log(error);
@@ -82,7 +78,6 @@ const ProfilePage = () => {
     <MainLayout>
       <section className="container px-5 py-10 mx-auto">
         <div className="w-full max-w-sm mx-auto">
-          <p>{profileData?.name}</p>
           <ProfilePicture avatar={profileData?.avatar} />
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="flex flex-col w-full mb-6">
@@ -172,10 +167,10 @@ const ProfilePage = () => {
             </div>
             <button
               type="submit"
-              disabled={!isValid || profileIsLoading}
+              disabled={!isValid || profileIsLoading || updateProfileIsLoading}
               className="w-full px-8 py-4 mb-6 text-lg font-bold text-white rounded-lg bg-primary disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Register
+              Update
             </button>
           </form>
         </div>
