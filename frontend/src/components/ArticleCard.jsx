@@ -41,7 +41,7 @@ const ArticleCard = ({ className }) => {
             </div>
           </div>
           <span className="text-sm italic font-bold text-dark-light md:text-base">
-            15 February
+            12 April
           </span>
         </div>
       </div>
