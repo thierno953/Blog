@@ -3,8 +3,8 @@ import { FiSearch } from "react-icons/fi";
 
 const Hero = () => {
   return (
-    <section className="flex flex-col px-5 py-5 mx-auto max-w-[1100px] items-center justify-center">
-      <div className="mt-10 lg:w-1/2">
+    <section className="flex flex-col px-5 py-5 mx-auto max-w-[1000px] items-center justify-center">
+      <div className="mt-10 lg:w-[60%]">
         <h1 className="font-roboto text-3xl text-center font-bold text-dark-soft md:text-5xl lg:text-4xl xl:text-5xl lg:max-w-[640px]">
           Read the most interesting articles
         </h1>
