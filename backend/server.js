@@ -1,14 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
-import path from "path";
 import connectDB from "./config/db";
-import {
-  errorResponserHandler,
-  invalidPathHandler,
-} from "./middleware/errorHandler";
 
-// Routes
-import userRoutes from "./routes/userRoutes";
 
 dotenv.config();
 connectDB();
@@ -19,13 +12,6 @@ app.get("/", (req, res) => {
   res.send("Server is running...");
 });
 
-app.use("/api/users", userRoutes);
-
-// static assets
-app.use("/uploads", express.static(path.join(__dirname, "./uploads")));
-
-app.use(invalidPathHandler);
-app.use(errorResponserHandler);
 
 const PORT = process.env.PORT || 5000;
 
