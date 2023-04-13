@@ -8,7 +8,7 @@ import {
 
 const SocialShareButtons = ({ url, title }) => {
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex justify-between w-full shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-lg p-4">
       <a
         target="_blank"
         rel="noreferrer"

@@ -35,7 +35,7 @@ const Comment = ({
         className="object-cover rounded-full w-9 h-9"
       />
       <div className="flex flex-col flex-1">
-        <h5 className="text-xs font-bold text-dark-hard">
+        <h5 className="text-xs font-bold text-dark-hard lg:text-sm">
           {comment.user.name}
         </h5>
         <span className="text-xs text-dark-light">
