@@ -1,13 +1,32 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import MainLayout from "../../components/MainLayout";
 import { Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+
+import MainLayout from "../../components/MainLayout";
+import { signup } from "../../services/index/users";
+
+
 
 const RegisterPage = () => {
+  const { mutate, isLoading } = useMutation({
+    mutationFn: ({ name, email, password }) => {
+      return signup({ name, email, password });
+    },
+    onSuccess: (data) => {
+      console.log(data)
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      console.log(error);
+    },
+  });
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isValue },
+    formState: { errors, isValid },
     watch,
   } = useForm({
     defaultValues: {
@@ -19,7 +38,12 @@ const RegisterPage = () => {
     mode: "onChange",
   });
 
-  const submitHandler = {};
+  const submitHandler = (data) => {
+    const { name, email, password } = data;
+    mutate({ name, email, password });
+  };
+
+  const password = watch("password");
 
   return (
     <MainLayout>
@@ -163,6 +187,7 @@ const RegisterPage = () => {
             </Link>
             <button
               type="submit"
+              disabled={!isValid || isLoading}
               className="w-full px-8 py-4 my-6 text-lg font-bold text-white rounded-lg bg-primary disabled:opacity-70 disabled:cursor-not-allowed"
             >
               Register

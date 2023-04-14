@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -9,7 +9,6 @@ export default {
           light: "#5A7184",
           hard: "#0D2436",
           soft: "#183B56",
-          black1: "#1a1d24",
         },
       },
       fontFamily: {
