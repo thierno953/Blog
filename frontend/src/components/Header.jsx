@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 import { images } from "../constants";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../store/actions/user";
 
 const navItemsInfo = [
   { name: "Home", type: "link" },
@@ -67,12 +69,19 @@ const NavItem = ({ item }) => {
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [navIsVisible, setNavIsVisible] = useState(false);
+  const userState = useSelector((state) => state.user);
+  const [profileDrowpdown, setProfileDrowpdown] = useState(false);
 
   const navVisibilityHandler = () => {
     setNavIsVisible((curState) => {
       return !curState;
     });
+  };
+
+  const logoutHandler = () => {
+    dispatch(logout());
   };
 
   return (
@@ -101,12 +110,49 @@ const Header = () => {
               <NavItem key={item.name} item={item} />
             ))}
           </ul>
-          <button
-            onClick={() => navigate("/login")}
-            className="px-6 py-2 mt-5 font-semibold text-blue-500 transition-all duration-300 border-2 border-blue-500 rounded-full lg:mt-0 hover:bg-blue-500 hover:text-white"
-          >
-            Sign in
-          </button>
+          {userState.userInfo ? (
+            <div className="flex flex-col items-center font-semibold text-white gap-y-5 lg:text-dark-soft lg:flex-row gap-x-2">
+              <div className="relative group">
+                <div className="flex flex-col items-center">
+                  <button
+                    className="flex items-center px-6 py-2 mt-5 font-semibold text-blue-500 transition-all duration-300 border-2 border-blue-500 rounded-full gap-x-1 lg:mt-0 hover:bg-blue-500 hover:text-white"
+                    onClick={() => setProfileDrowpdown(!profileDrowpdown)}
+                  >
+                    <span>Profile</span>
+                    <MdKeyboardArrowDown />
+                  </button>
+                  <div
+                    className={`${
+                      profileDrowpdown ? "block" : "hidden"
+                    } lg:hidden transition-all duration-500 pt-4 lg:absolute lg:bottom-0 lg:right-0 lg:transform lg:translate-y-full lg:group-hover:block w-max`}
+                  >
+                    <ul className="flex flex-col overflow-hidden text-center rounded-lg shadow-lg bg-dark-soft lg:bg-transparent">
+                      <button
+                        type="button"
+                        className="px-4 py-2 text-white hover:bg-dark-hard hover:text-white lg:text-dark-soft"
+                      >
+                        Dashboard
+                      </button>
+                      <button
+                        onClick={logoutHandler}
+                        type="button"
+                        className="px-4 py-2 text-white hover:bg-dark-hard hover:text-white lg:text-dark-soft"
+                      >
+                        Logout
+                      </button>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={() => navigate("/login")}
+              className="px-6 py-2 mt-5 font-semibold text-blue-500 transition-all duration-300 border-2 border-blue-500 rounded-full lg:mt-0 hover:bg-blue-500 hover:text-white"
+            >
+              Sign in
+            </button>
+          )}
         </div>
       </header>
     </section>
