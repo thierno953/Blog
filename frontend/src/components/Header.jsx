@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { images } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/actions/user";
 
 const navItemsInfo = [
-  { name: "Home", type: "link" },
-  { name: "Articles", type: "link" },
-  { name: "Pages", type: "dropdown", items: ["About us", "Contact us"] },
-  { name: "Faq", type: "link" },
+  { name: "Home", type: "link", href: "/" },
+  { name: "Articles", type: "link", href: "/articles" },
+  {
+    name: "Pages",
+    type: "dropdown",
+    items: [
+      { title: "About us", href: "/about" },
+      { title: "Contact us", href: "/contact" },
+    ],
+  },
+  { name: "Faq", type: "link", href: "/faq" },
 ];
 
 const NavItem = ({ item }) => {
@@ -28,9 +34,9 @@ const NavItem = ({ item }) => {
     <li className="relative group">
       {item.type === "link" ? (
         <>
-          <a href="/" className="px-4 py-2">
+          <Link to={item.href} className="px-4 py-2">
             {item.name}
-          </a>
+          </Link>
           <span className="cursor-pointer text-blue-500 absolute transition-all duration-500 font-bold left-0 top-0 group-hover:left-[90%] opacity-0 group-hover:opacity-100">
             /
           </span>
@@ -51,13 +57,13 @@ const NavItem = ({ item }) => {
           >
             <ul className="flex flex-col overflow-hidden text-center rounded-lg shadow-lg bg-dark-soft lg:bg-transparent">
               {item.items.map((page, index) => (
-                <a
+                <Link 
                   key={index}
-                  href="/"
+                  to={page.href}
                   className="px-4 py-2 text-white hover:bg-dark-hard hover:text-white lg:text-dark-soft"
                 >
-                  {page}
-                </a>
+                  {page.title}
+                </Link>
               ))}
             </ul>
           </div>
@@ -87,9 +93,9 @@ const Header = () => {
   return (
     <section className="sticky top-0 left-0 right-0 z-50 bg-white">
       <header className="max-w-[1100px] flex items-center justify-between px-5 py-4 mx-auto">
-        <div>
+        <Link to="/">
           <img className="w-16" src={images.Logo} alt="logo" />
-        </div>
+        </Link>
         <div className="z-50 lg:hidden">
           {navIsVisible ? (
             <AiOutlineClose
@@ -118,7 +124,7 @@ const Header = () => {
                     className="flex items-center px-6 py-2 mt-5 font-semibold text-blue-500 transition-all duration-300 border-2 border-blue-500 rounded-full gap-x-1 lg:mt-0 hover:bg-blue-500 hover:text-white"
                     onClick={() => setProfileDrowpdown(!profileDrowpdown)}
                   >
-                    <span>Profile</span>
+                    <span>Account</span>
                     <MdKeyboardArrowDown />
                   </button>
                   <div
@@ -128,10 +134,11 @@ const Header = () => {
                   >
                     <ul className="flex flex-col overflow-hidden text-center rounded-lg shadow-lg bg-dark-soft lg:bg-transparent">
                       <button
+                        onClick={() => navigate("/profile")}
                         type="button"
                         className="px-4 py-2 text-white hover:bg-dark-hard hover:text-white lg:text-dark-soft"
                       >
-                        Dashboard
+                        Profile Page
                       </button>
                       <button
                         onClick={logoutHandler}
