@@ -1,4 +1,5 @@
 import { uploadPicture } from "../middleware/uploadPictureMiddleware";
+import Comment from "../models/Comment";
 import Post from "../models/Post";
 import { fileRemover } from "../utils/fileRemover";
 import { v4 as uuidv4 } from "uuid";
@@ -45,7 +46,7 @@ const updatePost = async (req, res, next) => {
       post.tags = tags || post.tags;
       post.categories = categories || post.categories;
       const updatedPost = await post.save();
-      
+
       return res.json(updatedPost);
     };
 
@@ -79,4 +80,23 @@ const updatePost = async (req, res, next) => {
   }
 };
 
-export { createPost, updatePost };
+const deletePost = async (req, res, next) => {
+  try {
+    const post = await Post.findOneAndDelete({ slug: req.params.slug });
+
+    if (!post) {
+      const error = new Error("Post aws not found");
+      return next(error);
+    }
+
+    await Comment.deleteMany({ post: post._id });
+
+    return res.json({
+      message: "Post is successfully deleted",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { createPost, updatePost, deletePost };
