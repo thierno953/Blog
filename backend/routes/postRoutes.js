@@ -4,12 +4,13 @@ const router = express.Router();
 import {
   createPost,
   deletePost,
+  getAllPosts,
   getPost,
   updatePost,
 } from "../controllers/postController";
 import { authGuard, adminGuard } from "../middleware/authMiddleware";
 
-router.post("/", authGuard, adminGuard, createPost);
+router.post("/", authGuard, adminGuard, createPost).get(getAllPosts);
 router
   .route("/:slug")
   .put(authGuard, adminGuard, updatePost)
