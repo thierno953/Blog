@@ -10,7 +10,7 @@ import {
 } from "../controllers/postController";
 import { authGuard, adminGuard } from "../middleware/authMiddleware";
 
-router.post("/", authGuard, adminGuard, createPost).get(getAllPosts);
+router.route("/").post(authGuard, adminGuard, createPost).get(getAllPosts);
 router
   .route("/:slug")
   .put(authGuard, adminGuard, updatePost)
